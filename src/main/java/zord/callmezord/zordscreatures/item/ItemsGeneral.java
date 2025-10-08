@@ -5,6 +5,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import zord.callmezord.zordscreatures.ZordsCreatures;
+import zord.callmezord.zordscreatures.item.functional.ItemFossil;
 
 public class ItemsGeneral {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ZordsCreatures.MODID);
@@ -14,7 +15,7 @@ public class ItemsGeneral {
 //Fossil
     public static final DeferredItem<Item> FOSSIL = ITEMS.registerItem(
             "fossil",
-        Item::new,
+        ItemFossil::new,
         new Item.Properties()
 );
 
