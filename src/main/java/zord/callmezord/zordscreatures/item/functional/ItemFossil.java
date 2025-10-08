@@ -50,7 +50,7 @@ Player player = context.getPlayer();
             ServerLevel world = (ServerLevel) level;
             ResourceKey<LootTable> lootTableId = ResourceKey.create(
                     Registries.LOOT_TABLE,
-                    ResourceLocation.parse("minecraft:chests/abandoned_mineshaft")
+                    ResourceLocation.fromNamespaceAndPath("zordscreatures", "data/loot_table/fossil_loot.json")
             );
             LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(lootTableId);
 
@@ -58,7 +58,10 @@ Player player = context.getPlayer();
             LootParams.Builder lootBuilder = new LootParams.Builder(world)
                     .withParameter(LootContextParams.ORIGIN, pos.getCenter())
                     .withLuck(player.getLuck())
-                    .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
+                    .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
+                    .withDynamicDrop(ResourceLocation.fromNamespaceAndPath("zordscreatures", "data/loot_table/fossil_loot.json"), stackAcceptor -> {
+                        // something
+                    });
 
             //spawn particles
             world.sendParticles(
