@@ -1,0 +1,13 @@
+{
+  "itemGroup.zordscreatures": "Example Mod Tab",
+  "block.zordscreatures.example_block": "Example Block",
+  "item.zordscreatures.example_item": "Example Item",
+
+  "zordscreatures.configuration.title": "Zords Creatures Configs",
+  "zordscreatures.configuration.section.zordscreatures.common.toml": "Zords Creatures Configs",
+  "zordscreatures.configuration.section.zordscreatures.common.toml.title": "Zords Creatures Configs",
+  "zordscreatures.configuration.items": "Item List",
+  "zordscreatures.configuration.logDirtBlock": "Log Dirt Block",
+  "zordscreatures.configuration.magicNumberIntroduction": "Magic Number Text",
+  "zordscreatures.configuration.magicNumber": "Magic Number"
+}
