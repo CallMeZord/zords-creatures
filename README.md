@@ -1,5 +1,5 @@
 
-Installation information
+ZORD'S CREATURES!!!!!1!
 =======
 
 This template repository can be directly cloned to get you started with a new
