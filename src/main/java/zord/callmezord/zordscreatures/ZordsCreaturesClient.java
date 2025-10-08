@@ -24,8 +24,6 @@ public class ZordsCreaturesClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        ZordsCreatures.LOGGER.info("HELLO FROM CLIENT SETUP");
-        ZordsCreatures.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
     }
 }
