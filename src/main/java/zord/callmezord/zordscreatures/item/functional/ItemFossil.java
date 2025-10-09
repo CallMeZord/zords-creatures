@@ -1,5 +1,6 @@
 package zord.callmezord.zordscreatures.item.functional;
 
+import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -50,7 +50,7 @@ Player player = context.getPlayer();
             ServerLevel world = (ServerLevel) level;
             ResourceKey<LootTable> lootTableId = ResourceKey.create(
                     Registries.LOOT_TABLE,
-                    ResourceLocation.fromNamespaceAndPath("zordscreatures", "data/loot_table/fossil_loot.json")
+                    ResourceLocation.fromNamespaceAndPath("zordscreatures", "gameplay/fossil_loot")
             );
             LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(lootTableId);
 
@@ -58,10 +58,7 @@ Player player = context.getPlayer();
             LootParams.Builder lootBuilder = new LootParams.Builder(world)
                     .withParameter(LootContextParams.ORIGIN, pos.getCenter())
                     .withLuck(player.getLuck())
-                    .withOptionalParameter(LootContextParams.THIS_ENTITY, player)
-                    .withDynamicDrop(ResourceLocation.fromNamespaceAndPath("zordscreatures", "data/loot_table/fossil_loot.json"), stackAcceptor -> {
-                        // something
-                    });
+                    .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
 
             //spawn particles
             world.sendParticles(
