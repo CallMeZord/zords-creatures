@@ -1,6 +1,15 @@
 package zord.callmezord.zordscreatures;
 
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -15,6 +24,11 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import zord.callmezord.zordscreatures.item.ItemsGeneral;
+import zord.callmezord.zordscreatures.misc.LootTableGeneral;
+
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ZordsCreatures.MODID)
@@ -36,6 +50,7 @@ public class ZordsCreatures {
         // Note that this is necessary if and only if we want *this* class (ZordsCreatures) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+
 
 
         ItemsGeneral.register(modEventBus);
@@ -62,6 +77,13 @@ if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
 }
     }
 
+
+
+    public static void onGatherData(DataGenerator generator, PackOutput output, CompletableFuture<RegistrySetBuilder.PatchedRegistries> registries) {
+
+        LootTableGeneral.gatherData(generator, output, registries);
+
+    }
 
 
 
