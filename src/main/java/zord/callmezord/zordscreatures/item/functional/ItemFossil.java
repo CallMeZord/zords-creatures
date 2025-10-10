@@ -50,7 +50,7 @@ Player player = context.getPlayer();
             ServerLevel world = (ServerLevel) level;
             ResourceKey<LootTable> lootTableId = ResourceKey.create(
                     Registries.LOOT_TABLE,
-                    ResourceLocation.fromNamespaceAndPath("zordscreatures", "gameplay/fossil_loot")
+                    ResourceLocation.parse("zordscreatures:gameplay/fossil_loot")
             );
             LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(lootTableId);
 

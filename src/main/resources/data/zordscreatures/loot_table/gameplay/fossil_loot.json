@@ -1,0 +1,92 @@
+{
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cobblestone",
+          "weight": 40
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gravel",
+          "weight": 40
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:red_sandstone",
+          "weight": 27
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:sandstone",
+          "weight": 30
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:tuff",
+          "weight": 29
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone",
+          "weight": 30
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:coal",
+          "weight": 15
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:raw_iron",
+          "weight": 12
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:raw_copper",
+          "weight": 15
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:skeleton_skull",
+          "weight": 6
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:amethyst_shard",
+          "weight": 8
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:redstone",
+          "weight": 20
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nautilus_shell",
+          "weight": 5
+        },
+
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "weight": 5
+        }
+      ]
+    }
+  ]
+}
