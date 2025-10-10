@@ -39,8 +39,8 @@ public class ZordsCreatures {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
-        BlocksGeneral.register(modEventBus);
-        ItemsGeneral.register(modEventBus);
+        ItemsGeneral.ITEMS.register(modEventBus);
+        BlocksGeneral.BLOCKS.register(modEventBus);
 
         CreativeTab.CREATIVE_MODE_TABS.register(modEventBus);
 
