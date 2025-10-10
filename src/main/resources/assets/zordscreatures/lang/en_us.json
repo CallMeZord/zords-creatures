@@ -2,7 +2,8 @@
   "itemGroup.zordscreatures": "Zord's Creatures",
 
 
-  "item.zordscreatures.fossil": "Fossil"
+  "item.zordscreatures.fossil": "Fossil",
 
 
+  "block.zordscreatures.test_block": "Test Block"
 }
