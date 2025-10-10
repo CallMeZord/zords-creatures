@@ -24,7 +24,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import zord.callmezord.zordscreatures.item.ItemsGeneral;
-import zord.callmezord.zordscreatures.misc.LootTableGeneral;
+
 
 import java.util.List;
 import java.util.Set;
@@ -72,18 +72,12 @@ public class ZordsCreatures {
 
     // Add items and whatevers to the creative tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-    event.accept(ItemsGeneral.FOSSIL);
-}
-    }
-
-
-
-    public static void onGatherData(DataGenerator generator, PackOutput output, CompletableFuture<RegistrySetBuilder.PatchedRegistries> registries) {
-
-        LootTableGeneral.gatherData(generator, output, registries);
 
     }
+
+
+
+
 
 
 
