@@ -14,6 +14,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import zord.callmezord.zordscreatures.block.BlocksGeneral;
+import zord.callmezord.zordscreatures.entity.EntitiesGeneral;
 import zord.callmezord.zordscreatures.item.ItemsGeneral;
 
 
@@ -41,6 +42,7 @@ public class ZordsCreatures {
 
         ItemsGeneral.ITEMS.register(modEventBus);
         BlocksGeneral.BLOCKS.register(modEventBus);
+        EntitiesGeneral.register(modEventBus);
 
         CreativeTab.CREATIVE_MODE_TABS.register(modEventBus);
 
