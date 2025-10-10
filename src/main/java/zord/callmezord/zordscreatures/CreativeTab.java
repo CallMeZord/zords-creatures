@@ -21,7 +21,7 @@ public class CreativeTab {
             .title(Component.translatable("itemGroup.zordscreatures")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
 
-            .icon(() -> ItemsGeneral.FOSSIL.get().getDefaultInstance())
+            .icon( () -> ItemsGeneral.FOSSIL.get().getDefaultInstance())
 
             .displayItems((parameters, output) -> {
                 output.accept(ItemsGeneral.FOSSIL.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
