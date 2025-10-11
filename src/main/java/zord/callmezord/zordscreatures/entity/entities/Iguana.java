@@ -32,7 +32,7 @@ public class Iguana extends Animal {
 
         this.goalSelector.addGoal(2, new PanicGoal(this, 2));
         this.goalSelector.addGoal(1, new BreedGoal(this,1.2));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.getItem() == Items.SWEET_BERRIES, false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.getItem() == Items.MELON, false));
 
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1));
@@ -56,7 +56,7 @@ public class Iguana extends Animal {
 
     @Override
     public boolean isFood(ItemStack itemStack) {
-        return itemStack.getItem() == Items.SWEET_BERRIES;
+        return itemStack.getItem() == Items.MELON;
     }
 
     @Override
