@@ -24,7 +24,13 @@ public class CreativeTab {
             .icon( () -> ItemsGeneral.FOSSIL.get().getDefaultInstance())
 
             .displayItems((parameters, output) -> {
-                output.accept(ItemsGeneral.FOSSIL.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+
+
+                //ITEMS TO DISPLAY!
+                output.accept(ItemsGeneral.FOSSIL.get());
+                output.accept(ItemsGeneral.IGUANA_SPAWN_EGG.get());
+
+
             }).build());
 
 }

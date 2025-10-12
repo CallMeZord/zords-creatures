@@ -9,19 +9,21 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import zord.callmezord.zordscreatures.entity.EntitiesGeneral;
+import zord.callmezord.zordscreatures.item.ItemsGeneral;
+import zord.callmezord.zordscreatures.misc.TagsGeneral;
 
 public class Iguana extends Animal {
 
 
-    public Iguana(EntityType<? extends Animal> entityType, Level level) {
+    public Iguana(EntityType<? extends Iguana> entityType, Level level) {
         super(entityType, level);
     }
-
 
 
 
@@ -30,10 +32,9 @@ public class Iguana extends Animal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
-        this.goalSelector.addGoal(2, new PanicGoal(this, 2));
-        this.goalSelector.addGoal(1, new BreedGoal(this,1.2));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.getItem() == Items.MELON, false));
-
+        this.goalSelector.addGoal(2, new PanicGoal(this, 2.2));
+        this.goalSelector.addGoal(1, new BreedGoal(this,1.15));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.is(TagsGeneral.Items.IGUANA_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1));
 
@@ -41,12 +42,14 @@ public class Iguana extends Animal {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
+
     //ATTRIBUTES!
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.FOLLOW_RANGE, 24D);
+                .add(Attributes.MOVEMENT_SPEED, 0.15D)
+                .add(Attributes.FOLLOW_RANGE, 20D)
+                .add(Attributes.TEMPT_RANGE, 12D);
     }
 
 
@@ -56,11 +59,11 @@ public class Iguana extends Animal {
 
     @Override
     public boolean isFood(ItemStack itemStack) {
-        return itemStack.getItem() == Items.MELON;
+        return itemStack.is(TagsGeneral.Items.IGUANA_FOOD);
     }
 
     @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob partner) {
         return EntitiesGeneral.IGUANA.get().create(serverLevel, EntitySpawnReason.BREEDING);
     }
 

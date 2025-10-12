@@ -1,23 +1,34 @@
 package zord.callmezord.zordscreatures.entity.client.iguana;
 
+import com.ibm.icu.number.Scale;
+import net.minecraft.client.model.BabyModelTransform;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.AgeableMob;
+import zord.callmezord.zordscreatures.ZordsCreatures;
+import zord.callmezord.zordscreatures.entity.entities.Iguana;
 
+import java.util.Set;
+import java.util.function.Consumer;
 
 
 public class IguanaModel extends EntityModel<IguanaRenderState> {
- //   public static final MeshTransformer BABY_HEAD_TRANSFORMER = new BabyModelTransform(false, 4.0F, 4.0F, Set.of("head"));
-    public static final MeshTransformer BABY_TRANSFORMER = MeshTransformer.scaling(0.45F);
+
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana"), "main");
 
 //the parts, because why not
-    protected final ModelPart everything;
-    protected final ModelPart body;
-    protected final ModelPart proto_head;
+private final ModelPart everything;
+    private final ModelPart body;
+    private final ModelPart proto_head;
+    private final ModelPart head;
 
 
-//register them or something, or was it baking them?
+    //register them or something, or was it baking them?
     public IguanaModel(ModelPart root) {
         super(root);
 
@@ -26,6 +37,7 @@ public class IguanaModel extends EntityModel<IguanaRenderState> {
         this.everything = root.getChild("everything");
         this.body = this.everything.getChild("body");
         this.proto_head = this.everything.getChild("proto_head");
+        this.head = this.proto_head.getChild("Head");
     }
 
 //do the layer gizmos
@@ -94,5 +106,60 @@ public class IguanaModel extends EntityModel<IguanaRenderState> {
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
+
+
+
+
+    @Override
+    public void setupAnim(IguanaRenderState renderState) {
+
+        this.root.getAllParts().forEach(part -> {
+            Consumer<ModelPart> resetPose = ModelPart::resetPose;
+        });
+
+        //BABY MODEL HANDLING & ADULT DEBUGGER
+        if(renderState.isBaby) {
+            //HEAD SCALING -baby
+            this.proto_head.xScale = 1.6F;
+            this.proto_head.yScale = 1.6F;
+            this.proto_head.zScale = 1.6F;
+            //BODY SCALING -baby
+            this.everything.xScale = 0.4F;
+            this.everything.yScale = 0.4F;
+            this.everything.zScale = 0.4F;
+            //ADJUST MODEL PLACEMENT -baby
+            this.everything.y = 21.5F;
+        }
+        else {
+            //HEAD SCALING -adult
+            this.proto_head.xScale = 1F;
+            this.proto_head.yScale = 1F;
+            this.proto_head.zScale = 1F;
+            //BODY SCALING -adult
+            this.everything.xScale = 1F;
+            this.everything.yScale = 1F;
+            this.everything.zScale = 1F;
+            //ADJUST MODEL PLACEMENT -adult
+            this.everything.y = 18.0F;
+        }
+
+
+        this.applyHeadRotation(renderState, renderState.yRot, renderState.xRot);
+
+    }
+
+
+
+
+    private void applyHeadRotation(IguanaRenderState renderState, float headYaw, float headPitch) {
+        headYaw = Mth.clamp(headYaw, -30.0F, 30.0F);
+        headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
+
+        this.proto_head.yRot = headYaw * ((float)Math.PI / 180F);
+        this.proto_head.xRot = headPitch * ((float)Math.PI / 180F);
+    }
+
+
+
 
 }

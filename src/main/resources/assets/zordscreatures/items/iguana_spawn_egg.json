@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "zordscreatures:item/iguana_spawn_egg"
+  },
+  "properties": {
+    "hand_animation_on_swap": false,
+    "oversized_in_gui": false
+  }
+}

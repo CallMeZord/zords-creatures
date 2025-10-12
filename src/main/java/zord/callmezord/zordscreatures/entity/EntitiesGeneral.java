@@ -15,19 +15,18 @@ import java.util.function.Supplier;
 
 public class EntitiesGeneral {
 
-public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-        DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, ZordsCreatures.MODID);
+public static final DeferredRegister.Entities ENTITY_TYPES =
+        DeferredRegister.createEntities(ZordsCreatures.MODID);
 
 
-
-public static final Supplier<EntityType<Iguana>> IGUANA =
-        ENTITY_TYPES.register("iguana", () -> EntityType.Builder.of(Iguana::new, MobCategory.CREATURE)
-                .sized(0.8f, 0.6f).build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("zordscreatures", "iguana"))));
-
+    public static final Supplier<EntityType<Iguana>> IGUANA = ENTITY_TYPES.registerEntityType(
+            "iguana", Iguana::new, MobCategory.CREATURE,
+            builder -> builder
+                    .sized(0.8f, 0.6f)
+    );
 
 
 public static void register(IEventBus bus) {
     ENTITY_TYPES.register(bus);
 }
-
 }
