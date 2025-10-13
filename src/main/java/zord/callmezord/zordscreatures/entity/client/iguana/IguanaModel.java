@@ -1,31 +1,42 @@
 package zord.callmezord.zordscreatures.entity.client.iguana;
 
-import com.ibm.icu.number.Scale;
-import net.minecraft.client.model.BabyModelTransform;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.AgeableMob;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 import zord.callmezord.zordscreatures.ZordsCreatures;
-import zord.callmezord.zordscreatures.entity.entities.Iguana;
-
-import java.util.Set;
-import java.util.function.Consumer;
 
 
 public class IguanaModel extends EntityModel<IguanaRenderState> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana"), "main");
 
-//the parts, because why not
+    //ANIMATION HOLDER
+    public static final AnimationHolder IGUANA_IDLE =
+            Model.getAnimation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana/iguana_idle"));
+    public static final AnimationHolder IGUANA_WALK =
+            Model.getAnimation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana/iguana_walk"));
+    public static final AnimationHolder IGUANA_BASKING =
+            Model.getAnimation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana/iguana_sunbathing"));
+    public static final AnimationHolder IGUANA_HEAD_SHAKE =
+            Model.getAnimation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana/iguana_head_shaker"));
+
+
+     //the parts, because why not + ANIM storage
 private final ModelPart everything;
     private final ModelPart body;
     private final ModelPart proto_head;
     private final ModelPart head;
+    private final KeyframeAnimation idle;
+    private final KeyframeAnimation walk;
+    private final KeyframeAnimation basking;
+    private final KeyframeAnimation head_shake;
 
 
     //register them or something, or was it baking them?
@@ -35,17 +46,24 @@ private final ModelPart everything;
         ModelPart modelpart = root.getChild("everything");
 
         this.everything = root.getChild("everything");
-        this.body = this.everything.getChild("body");
+        this.body = everything;
         this.proto_head = this.everything.getChild("proto_head");
         this.head = this.proto_head.getChild("Head");
+
+        //ANIMATION BAKING
+        this.idle = IGUANA_IDLE.get().bake(root);
+        this.walk = IGUANA_WALK.get().bake(root);
+        this.basking = IGUANA_BASKING.get().bake(root);
+        this.head_shake = IGUANA_HEAD_SHAKE.get().bake(root);
     }
 
-//do the layer gizmos
+
+    //do the layer gizmos
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+        PartDefinition root1 = meshdefinition.getRoot();
 
-        PartDefinition everything = partdefinition.addOrReplaceChild("everything", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, 0.0F));
+        PartDefinition everything = root1.addOrReplaceChild("everything", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, 0.0F));
 
         PartDefinition left_f = everything.addOrReplaceChild("left_f", CubeListBuilder.create(), PartPose.offset(3.25F, 1.45F, -4.0F));
 
@@ -91,75 +109,84 @@ private final ModelPart everything;
 
         PartDefinition proto_head = everything.addOrReplaceChild("proto_head", CubeListBuilder.create(), PartPose.offset(0.0F, -0.75F, -6.0F));
 
-        PartDefinition Head = proto_head.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-0.1167F, -0.76F, -2.7667F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.1667F, -0.35F, -0.0833F));
+        PartDefinition head = proto_head.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-0.1167F, -0.76F, -2.7667F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.1667F, -0.35F, -0.0833F));
 
-        PartDefinition eye_r1 = Head.addOrReplaceChild("eye_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.04F, -0.46F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.1567F, -0.2F, -1.7667F, 0.0F, 0.0F, -3.1416F));
+        PartDefinition eye_r1 = head.addOrReplaceChild("eye_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.04F, -0.46F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.1567F, -0.2F, -1.7667F, 0.0F, 0.0F, -3.1416F));
 
-        PartDefinition h1 = Head.addOrReplaceChild("h1", CubeListBuilder.create().texOffs(30, 30).addBox(-1.0F, -7.0F, -5.0F, 4.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
+        PartDefinition h1 = head.addOrReplaceChild("h1", CubeListBuilder.create().texOffs(30, 30).addBox(-1.0F, -7.0F, -5.0F, 4.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
                 .texOffs(52, 0).addBox(-0.5F, -5.0F, -2.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.1667F, 5.0F, -0.9167F));
 
-        PartDefinition top_hair = Head.addOrReplaceChild("top_hair", CubeListBuilder.create().texOffs(0, 45).addBox(0.0F, -2.0F, -2.5F, 1.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, -2.0F, -2.4167F));
+        PartDefinition top_hair = head.addOrReplaceChild("top_hair", CubeListBuilder.create().texOffs(0, 45).addBox(0.0F, -2.0F, -2.5F, 1.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, -2.0F, -2.4167F));
 
-        PartDefinition NeckBeard = Head.addOrReplaceChild("NeckBeard", CubeListBuilder.create().texOffs(10, 53).addBox(0.0F, -0.25F, -3.0F, 1.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, 1.25F, -1.9167F));
+        PartDefinition NeckBeard = head.addOrReplaceChild("NeckBeard", CubeListBuilder.create().texOffs(10, 53).addBox(0.0F, -0.25F, -3.0F, 1.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, 1.25F, -1.9167F));
 
-        PartDefinition male_neck = Head.addOrReplaceChild("male_neck", CubeListBuilder.create().texOffs(36, 40).addBox(-2.5F, -1.5F, -1.5F, 5.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, 1.6F, -1.5167F));
+        PartDefinition male_neck = head.addOrReplaceChild("male_neck", CubeListBuilder.create().texOffs(36, 40).addBox(-2.5F, -1.5F, -1.5F, 5.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.1667F, 1.6F, -1.5167F));
 
         return LayerDefinition.create(meshdefinition, 128, 128);
     }
 
 
 
+    //EXTRA VALUES
+    private boolean wasBaby = false;
 
+
+
+    //GENERAL MODEL CHANGES & MAIN ANIM
     @Override
     public void setupAnim(IguanaRenderState renderState) {
 
-        this.root.getAllParts().forEach(part -> {
-            Consumer<ModelPart> resetPose = ModelPart::resetPose;
-        });
+        this.root().getAllParts().forEach(ModelPart::resetPose);
 
-        //BABY MODEL HANDLING & ADULT DEBUGGER
-        if(renderState.isBaby) {
-            //HEAD SCALING -baby
-            this.proto_head.xScale = 1.6F;
-            this.proto_head.yScale = 1.6F;
-            this.proto_head.zScale = 1.6F;
-            //BODY SCALING -baby
-            this.everything.xScale = 0.4F;
-            this.everything.yScale = 0.4F;
-            this.everything.zScale = 0.4F;
-            //ADJUST MODEL PLACEMENT -baby
-            this.everything.y = 21.5F;
-        }
-        else {
-            //HEAD SCALING -adult
-            this.proto_head.xScale = 1F;
-            this.proto_head.yScale = 1F;
-            this.proto_head.zScale = 1F;
-            //BODY SCALING -adult
-            this.everything.xScale = 1F;
-            this.everything.yScale = 1F;
-            this.everything.zScale = 1F;
-            //ADJUST MODEL PLACEMENT -adult
-            this.everything.y = 18.0F;
-        }
+        //ANIMATIONS
 
+        this.walk.applyWalk(renderState.walkAnimationPos, renderState.walkAnimationSpeed, 4, 3);
+        this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);
+        //
 
         this.applyHeadRotation(renderState, renderState.yRot, renderState.xRot);
-
+        applyBabyScaling(renderState);
     }
 
 
 
 
-    private void applyHeadRotation(IguanaRenderState renderState, float headYaw, float headPitch) {
-        headYaw = Mth.clamp(headYaw, -30.0F, 30.0F);
-        headPitch = Mth.clamp(headPitch, -25.0F, 45.0F);
 
-        this.proto_head.yRot = headYaw * ((float)Math.PI / 180F);
-        this.proto_head.xRot = headPitch * ((float)Math.PI / 180F);
+
+    //HEAD ROTATION
+    private void applyHeadRotation(IguanaRenderState state, float yRot, float xRot) {
+        float headYaw = Mth.clamp(state.yRot, -30.0F, 30.0F);
+        float headPitch = Mth.clamp(state.xRot, -25.0F, 45.0F);
+
+        this.head.yRot += headYaw * ((float) Math.PI / 180F);
+        this.head.xRot += headPitch * ((float) Math.PI / 180F);
     }
 
 
 
+    //BABY SCALING
+    private void applyBabyScaling(IguanaRenderState state) {
+        if (state.isBaby != wasBaby) {
+            if (state.isBaby) {
+                this.proto_head.xScale = 1.6F;
+                this.proto_head.yScale = 1.6F;
+                this.proto_head.zScale = 1.6F;
 
+                this.everything.xScale = 0.4F;
+                this.everything.yScale = 0.4F;
+                this.everything.zScale = 0.4F;
+                this.everything.y = 21.5F;
+            } else {
+                this.proto_head.xScale = 1F;
+                this.proto_head.yScale = 1F;
+                this.proto_head.zScale = 1F;
+
+                this.everything.xScale = 1F;
+                this.everything.yScale = 1F;
+                this.everything.zScale = 1F;
+                this.everything.y = 18.0F;
+            }
+            wasBaby = state.isBaby;
+        }
+    }
 }

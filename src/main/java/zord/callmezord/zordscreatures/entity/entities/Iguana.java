@@ -2,6 +2,7 @@ package zord.callmezord.zordscreatures.entity.entities;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -9,17 +10,17 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import zord.callmezord.zordscreatures.entity.EntitiesGeneral;
-import zord.callmezord.zordscreatures.item.ItemsGeneral;
 import zord.callmezord.zordscreatures.misc.TagsGeneral;
 
 public class Iguana extends Animal {
 
+    //Extras
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
     public Iguana(EntityType<? extends Iguana> entityType, Level level) {
         super(entityType, level);
@@ -70,5 +71,25 @@ public class Iguana extends Animal {
 
 
 
+    //TICK -STUFFS! (like the bug)
+    @Override
+    public void tick() {
+        super.tick();
 
+        // PLAY IDLE IF IT'S NOT THERE
+        if (!this.isMoving() && this.onGround()) {
+            this.idleAnimationState.startIfStopped(this.tickCount);
+        } else {
+            this.idleAnimationState.stop();
+        }
+
+        // TICK ANIM
+        this.idleAnimationState.animateWhen(!this.isMoving(), this.tickCount);
+    }
+
+
+    //CHECKS IF THE ENTITY IS MOVING
+    private boolean isMoving() {
+        return this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D;
+    }
 }

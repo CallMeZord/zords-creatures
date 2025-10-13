@@ -9,6 +9,10 @@ public class IguanaRenderState extends LivingEntityRenderState {
     public ItemStack stackInHand;
     public boolean isBaby;
 
+//ANIMATIONS
+public final AnimationState idleAnimationState = new AnimationState();
+
+
     public IguanaRenderState() {
         super();
     }
