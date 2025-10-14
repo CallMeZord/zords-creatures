@@ -10,6 +10,10 @@ import zord.callmezord.zordscreatures.entity.entities.Iguana;
 
 public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, IguanaModel> {
 
+    private static final ResourceLocation MALE_TEXTURE =
+             ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_male.png");
+    private static final ResourceLocation FEMALE_TEXTURE =
+             ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_female.png");
 
     public IguanaRenderer(EntityRendererProvider.Context context) {
         super(context, new IguanaModel(context.bakeLayer(IguanaModel.LAYER_LOCATION)), 0.45F);
@@ -18,8 +22,8 @@ public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, Iguan
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull IguanaRenderState iguanaRenderState) {
-        return ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_male.png");
 
+        return iguanaRenderState.isMale ? MALE_TEXTURE : FEMALE_TEXTURE;
     }
 
 
@@ -38,6 +42,9 @@ public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, Iguan
         state.ageInTicks = entity.tickCount + partialTicks;
         //EXTRACTS THE BABY STATE
         state.isBaby = entity.isBaby();
+
+        //GET GENDER
+        state.isMale = entity.isMale();
 
         //TICKLERS ANIMATORS!
         state.idleAnimationState.copyFrom(entity.idleAnimationState);

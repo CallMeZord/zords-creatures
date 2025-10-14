@@ -17,6 +17,8 @@ public class IguanaModel extends EntityModel<IguanaRenderState> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana"), "main");
 
+
+
     //ANIMATION HOLDER
     public static final AnimationHolder IGUANA_IDLE =
             Model.getAnimation(ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "iguana/iguana_idle"));
@@ -140,8 +142,11 @@ private final ModelPart everything;
 
         //ANIMATIONS
 
-        this.walk.applyWalk(renderState.walkAnimationPos, renderState.walkAnimationSpeed, 4, 3);
-        this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);
+        if (renderState.walkAnimationSpeed > 0.1F) {
+            this.walk.applyWalk(renderState.walkAnimationPos, renderState.walkAnimationSpeed, 6f, 5f);
+        } else {
+            this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);
+        }
         //
 
         this.applyHeadRotation(renderState, renderState.yRot, renderState.xRot);
@@ -166,7 +171,6 @@ private final ModelPart everything;
 
     //BABY SCALING
     private void applyBabyScaling(IguanaRenderState state) {
-        if (state.isBaby != wasBaby) {
             if (state.isBaby) {
                 this.proto_head.xScale = 1.6F;
                 this.proto_head.yScale = 1.6F;
@@ -185,8 +189,7 @@ private final ModelPart everything;
                 this.everything.yScale = 1F;
                 this.everything.zScale = 1F;
                 this.everything.y = 18.0F;
-            }
-            wasBaby = state.isBaby;
+
         }
     }
 }
