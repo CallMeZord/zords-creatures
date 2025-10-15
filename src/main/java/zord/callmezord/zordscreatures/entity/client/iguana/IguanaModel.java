@@ -141,12 +141,12 @@ private final ModelPart everything;
         this.root().getAllParts().forEach(ModelPart::resetPose);
 
         //ANIMATIONS
-
-        if (renderState.walkAnimationSpeed > 0.1F) {
-            this.walk.applyWalk(renderState.walkAnimationPos, renderState.walkAnimationSpeed, 6f, 5f);
-        } else {
-            this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);
-        }
+        if (renderState.isBasking && renderState.walkAnimationSpeed < 0.1F) {
+            this.basking.apply(renderState.baskingAnimationState, renderState.ageInTicks);}
+        else if (renderState.walkAnimationSpeed > 0.1F) {
+            this.walk.applyWalk(renderState.walkAnimationPos, renderState.walkAnimationSpeed, 6f, 5f);}
+        else if (renderState.walkAnimationSpeed < 0.1F) {
+            this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);}
         //
 
         this.applyHeadRotation(renderState, renderState.yRot, renderState.xRot);

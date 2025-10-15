@@ -1,6 +1,5 @@
 package zord.callmezord.zordscreatures.item.functional;
 
-import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -46,6 +45,7 @@ Player player = context.getPlayer();
             context.getItemInHand().shrink(1);
             level.playSound(null, context.getClickedPos(),  SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.6F, 1.05f);
 
+
             //servering the loot table
             ServerLevel world = (ServerLevel) level;
             ResourceKey<LootTable> lootTableId = ResourceKey.create(
@@ -59,6 +59,8 @@ Player player = context.getPlayer();
                     .withParameter(LootContextParams.ORIGIN, pos.getCenter())
                     .withLuck(player.getLuck())
                     .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
+
+
 
             //spawn particles
             world.sendParticles(

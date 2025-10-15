@@ -4,12 +4,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import zord.callmezord.zordscreatures.item.ItemsGeneral;
 
-import java.util.function.Supplier;
 
 public class CreativeTab {
 
@@ -28,10 +26,10 @@ public class CreativeTab {
 
                 //ITEMS TO DISPLAY!
                 output.accept(ItemsGeneral.FOSSIL.get());
+                output.accept(ItemsGeneral.SHED.get());
                 output.accept(ItemsGeneral.IGUANA_SPAWN_EGG.get());
-
+                output.accept(ItemsGeneral.IGUANA_EGG.get());
 
             }).build());
 
 }
-

@@ -12,6 +12,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import zord.callmezord.zordscreatures.ZordsCreatures;
 import zord.callmezord.zordscreatures.entity.EntitiesGeneral;
 import zord.callmezord.zordscreatures.item.functional.ItemFossil;
+import zord.callmezord.zordscreatures.item.functional.ItemIguanaEgg;
+import zord.callmezord.zordscreatures.item.functional.ItemShed;
 
 public class ItemsGeneral {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ZordsCreatures.MODID);
@@ -23,6 +25,19 @@ public class ItemsGeneral {
         new Item.Properties()
 );
 
+    //IGUANA SHED
+    public static final DeferredItem<Item> SHED = ITEMS.registerItem(
+            "shed",
+            ItemShed::new,
+            new Item.Properties()
+    );
+
+    //IGUANA EGG
+    public static final DeferredItem<Item> IGUANA_EGG = ITEMS.registerItem(
+            "iguana_egg",
+            ItemIguanaEgg::new,
+            new Item.Properties()
+    );
 
     //IGUANA SPAWN EGG
     public static final DeferredItem<SpawnEggItem> IGUANA_SPAWN_EGG = ITEMS.registerItem(

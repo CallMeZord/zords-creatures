@@ -46,9 +46,11 @@ public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, Iguan
         //GET GENDER
         state.isMale = entity.isMale();
 
-        //TICKLERS ANIMATORS!
-        state.idleAnimationState.copyFrom(entity.idleAnimationState);
+        state.isBasking = entity.isBasking();
 
+        //TICKLERS ANIMATORS!
+        state.baskingAnimationState.copyFrom(entity.baskingAnimationState);
+        state.idleAnimationState.copyFrom(entity.idleAnimationState);
 
     }
 }
