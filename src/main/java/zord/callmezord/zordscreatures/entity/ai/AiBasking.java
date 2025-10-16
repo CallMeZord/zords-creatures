@@ -2,7 +2,6 @@ package zord.callmezord.zordscreatures.entity.ai;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
@@ -35,6 +34,7 @@ public class AiBasking extends Goal {
         this.randomExtraDelay = randomExtraDelay;
         this.baskDurationTicks = baskDurationTicks;
         this.searchRadius = searchRadius;
+        delayTimer = baseDelayTicks;
 
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
     }
@@ -58,7 +58,6 @@ public class AiBasking extends Goal {
 
             targetPos = sunPos.get();
             return true;
-
         }
         return false;
     }
@@ -112,18 +111,34 @@ public class AiBasking extends Goal {
     private Optional<BlockPos> findSunnySpot() {
         Level level = mob.level();
         BlockPos basePos = mob.blockPosition();
+        BlockPos prefPos = null;
+        int top = Integer.MIN_VALUE;
 
-        for (int i = 0; i < 15; i++) {
+        for (int dx = -searchRadius; dx <= searchRadius; dx++) {
+            for (int dz = -searchRadius; dz <= searchRadius; dz++) {
 
-            int dx = Mth.nextInt(mob.getRandom(), -searchRadius, searchRadius);
-            int dz = Mth.nextInt(mob.getRandom(), -searchRadius, searchRadius);
+                BlockPos pos = basePos.offset(dx, 0, dz);
+                BlockPos ground = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos);
 
-            BlockPos pos = basePos.offset(dx, 0, dz);
-            BlockPos ground = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos);
+                if (level.canSeeSky(ground) && level.getBlockState(ground.below()).isSolid()) {
 
-            if (level.canSeeSky(ground) && level.getBlockState(ground.below()).isSolid()) return Optional.of(ground);
+                    if (ground.getY() > top) {
+
+                        if (mob.getNavigation().isStableDestination(ground)) {
+
+                            top = ground.getY();
+                            prefPos = ground;
+
+                        }
+
+                    }
+
+                }
+
+            }
 
         }
-        return Optional.empty();
+        return Optional.ofNullable(prefPos);
     }
+
 }

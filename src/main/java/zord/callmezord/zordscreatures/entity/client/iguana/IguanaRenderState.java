@@ -10,10 +10,12 @@ public class IguanaRenderState extends LivingEntityRenderState {
     public boolean isBaby;
     public boolean isMale;
     public boolean isBasking;
+    public boolean isAlbino;
 
 //ANIMATIONS
 public final AnimationState idleAnimationState = new AnimationState();
 public final AnimationState baskingAnimationState = new AnimationState();
+public final AnimationState headShakeAnimationState = new AnimationState();
 
 
     public IguanaRenderState() {

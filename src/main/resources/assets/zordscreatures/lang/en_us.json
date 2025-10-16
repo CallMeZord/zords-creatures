@@ -2,13 +2,24 @@
   "itemGroup.zordscreatures": "Zord's Creatures",
 
 
+
   "item.zordscreatures.fossil": "Fossil",
   "item.zordscreatures.shed": "Shed",
   "item.zordscreatures.iguana_egg": "Iguana Egg",
 
 
+
   "block.zordscreatures.test_block": "Test Block",
 
+
+
   "entity.zordscreatures.iguana": "Iguana",
-  "item.zordscreatures.iguana_spawn_egg": "Iguana Spawn Egg"
+  "item.zordscreatures.iguana_spawn_egg": "Iguana Spawn Egg",
+
+  "item.zordscreatures.pancake_slug_spawn_egg": "Pancake Slug Spawn Egg",
+
+
+
+  "zordscreatures.sound.subtitle.iguana_hurt": "Iguana Cries",
+  "zordscreatures.sound.subtitle.iguana_death": "Iguana Dies"
 }

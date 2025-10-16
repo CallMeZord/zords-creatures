@@ -129,10 +129,6 @@ private final ModelPart everything;
 
 
 
-    //EXTRA VALUES
-    private boolean wasBaby = false;
-
-
 
     //GENERAL MODEL CHANGES & MAIN ANIM
     @Override
@@ -148,13 +144,13 @@ private final ModelPart everything;
         else if (renderState.walkAnimationSpeed < 0.1F) {
             this.idle.apply(renderState.idleAnimationState, renderState.ageInTicks);}
         //
+        if (renderState.headShakeAnimationState.isStarted()) {
+            this.head_shake.apply(renderState.headShakeAnimationState, renderState.ageInTicks);}
+        //
 
         this.applyHeadRotation(renderState, renderState.yRot, renderState.xRot);
         applyBabyScaling(renderState);
     }
-
-
-
 
 
 

@@ -23,13 +23,19 @@ public class CreativeTab {
 
             .displayItems((parameters, output) -> {
 
-
-                //ITEMS TO DISPLAY!
-                output.accept(ItemsGeneral.FOSSIL.get());
-                output.accept(ItemsGeneral.SHED.get());
+                //SPAWN EGGS
                 output.accept(ItemsGeneral.IGUANA_SPAWN_EGG.get());
+                output.accept(ItemsGeneral.PANCAKE_SLUG_SPAWN_EGG.get());
+
+
+                //ITEMS
+                output.accept(ItemsGeneral.FOSSIL.get());
+
+                output.accept(ItemsGeneral.SHED.get());
                 output.accept(ItemsGeneral.IGUANA_EGG.get());
 
-            }).build());
 
+                //BLOCKS
+
+            }).build());
 }

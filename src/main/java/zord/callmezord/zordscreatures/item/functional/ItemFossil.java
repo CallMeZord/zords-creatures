@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -43,7 +44,7 @@ Player player = context.getPlayer();
 
             // Item-eater & screamer & other effects
             context.getItemInHand().shrink(1);
-            level.playSound(null, context.getClickedPos(),  SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.6F, 1.05f);
+            level.playSound(null, context.getClickedPos(),  SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 0.6F, 1f);
 
 
             //servering the loot table

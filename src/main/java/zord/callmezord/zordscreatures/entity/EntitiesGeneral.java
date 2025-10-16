@@ -1,9 +1,6 @@
 package zord.callmezord.zordscreatures.entity;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
@@ -25,8 +22,7 @@ public static final DeferredRegister.Entities ENTITY_TYPES =
                     .sized(0.8f, 0.6f)
     );
 
-
-public static void register(IEventBus bus) {
+    public static void register(IEventBus bus) {
     ENTITY_TYPES.register(bus);
 }
 }

@@ -15,16 +15,30 @@ public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, Iguan
     private static final ResourceLocation FEMALE_TEXTURE =
              ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_female.png");
 
+    private static final ResourceLocation ALBINO_MALE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_male_albino.png");
+    private static final ResourceLocation ALBINO_FEMALE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(ZordsCreatures.MODID, "textures/entity/iguana/iguana_female_albino.png");
+
     public IguanaRenderer(EntityRendererProvider.Context context) {
         super(context, new IguanaModel(context.bakeLayer(IguanaModel.LAYER_LOCATION)), 0.45F);
     }
 
 
+
     @Override
     public @NotNull ResourceLocation getTextureLocation(@NotNull IguanaRenderState iguanaRenderState) {
 
-        return iguanaRenderState.isMale ? MALE_TEXTURE : FEMALE_TEXTURE;
-    }
+        //ALBINO & GENDER HANDLING
+        if (iguanaRenderState.isAlbino) {
+            return iguanaRenderState.isMale ? ALBINO_MALE_TEXTURE : ALBINO_FEMALE_TEXTURE;
+        }
+        else {
+            return iguanaRenderState.isMale ? MALE_TEXTURE : FEMALE_TEXTURE;
+        }
+
+        }
+
 
 
     //create a render state
@@ -45,12 +59,13 @@ public class IguanaRenderer extends MobRenderer<Iguana, IguanaRenderState, Iguan
 
         //GET GENDER
         state.isMale = entity.isMale();
-
+        state.isAlbino = entity.isAlbino();
         state.isBasking = entity.isBasking();
 
         //TICKLERS ANIMATORS!
         state.baskingAnimationState.copyFrom(entity.baskingAnimationState);
         state.idleAnimationState.copyFrom(entity.idleAnimationState);
+        state.headShakeAnimationState.copyFrom(entity.headShakeAnimationState);
 
     }
 }

@@ -16,7 +16,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import zord.callmezord.zordscreatures.block.BlocksGeneral;
 import zord.callmezord.zordscreatures.entity.EntitiesGeneral;
 import zord.callmezord.zordscreatures.item.ItemsGeneral;
-
+import zord.callmezord.zordscreatures.misc.SoundsGeneral;
 
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -40,6 +40,7 @@ public class ZordsCreatures {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+        SoundsGeneral.SOUNDS.register(modEventBus);
         ItemsGeneral.ITEMS.register(modEventBus);
         BlocksGeneral.BLOCKS.register(modEventBus);
         EntitiesGeneral.register(modEventBus);

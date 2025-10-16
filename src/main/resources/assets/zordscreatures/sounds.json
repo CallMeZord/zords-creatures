@@ -1,0 +1,27 @@
+{
+  "iguana_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "zordscreatures:iguana_hurt_0"
+      },
+      {
+        "name": "zordscreatures:iguana_hurt_1"
+      }
+    ],
+    "subtitle": "zordscreatures.sound.subtitle.iguana_hurt"
+  },
+
+  "iguana_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "zordscreatures:iguana_death_0"
+      },
+      {
+        "name": "zordscreatures:iguana_death_1"
+      }
+    ],
+    "subtitle": "zordscreatures.sound.subtitle.iguana_death"
+  }
+}

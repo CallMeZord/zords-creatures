@@ -39,6 +39,14 @@ public class ItemsGeneral {
             new Item.Properties()
     );
 
+    //PANCAKE SLUG EGG
+    public static final DeferredItem<SpawnEggItem> PANCAKE_SLUG_SPAWN_EGG = ITEMS.registerItem(
+            "pancake_slug_spawn_egg",
+            properties -> new SpawnEggItem(
+                    properties.spawnEgg(EntitiesGeneral.IGUANA.get())
+            )
+    );
+
     //IGUANA SPAWN EGG
     public static final DeferredItem<SpawnEggItem> IGUANA_SPAWN_EGG = ITEMS.registerItem(
             "iguana_spawn_egg",

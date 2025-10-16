@@ -59,7 +59,7 @@ public class IguanaEggProjectile extends ThrowableItemProjectile {
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level().isClientSide()) {
-            if (this.random.nextInt(4) == 0) {
+            if (this.random.nextInt(2) == 0) {
                 int i = 1;
                 if (this.random.nextInt(26) == 0) {
                     i = 2;
@@ -76,16 +76,16 @@ public class IguanaEggProjectile extends ThrowableItemProjectile {
                             break;
                         }
                         iguana.setMale(this.random.nextBoolean());
+
+                        if (this.random.nextInt(100) == 0) {iguana.setAlbino(true);} else {iguana.setAlbino(false);}
+
                         this.level().addFreshEntity(iguana);
-                    }
-                }
-            }
+                    }}}
 
             this.level().broadcastEntityEvent(this, (byte)3);
             this.discard();
-        }
+        } }
 
-    }
 
     protected Item getDefaultItem() {
         return ItemsGeneral.IGUANA_EGG.get();
